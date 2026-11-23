@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import userRouter from "./routes/userRouter.ts";
 
 // 환경설정 파일을 불러오는 도구가 필요함 => 그래서 설치한게 dotenv 패키지
 // 환경설정 파일을 불러오는 dotenv 패키지 호출
@@ -19,6 +20,16 @@ app.use(express.json());
 // 요청(Request)의 본문(body)에 담긴 URL-encoded 데이터를 객체로 변환(파싱)하여 request.body에 저장
 // URL은 한들을 원래 포함할 수 없기 때문에 변환을 하게 되는데, 그것을 한글로 받아들일 수 있게 하는 기능
 app.use(express.urlencoded({ extended: true }));
+
+
+// 이 앱에 Request가 들어올 떄의 경로를 읽어서
+// 첫번쨰 매개변수의 값인 '/user'로 시작하면, 두번쨰 매개변수의 파일로 Routing시킴
+app.use("/user", userRouter)
+
+
+
+
+// ------------------ Express 구동 부----------------
 
 
 
