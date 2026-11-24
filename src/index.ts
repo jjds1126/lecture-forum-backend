@@ -9,46 +9,43 @@ dotenv.config();
 // 백엔드를 구성하는 express 패키지를 이용해 앱 만들기
 const app = express();
 
-// express 앱에 기능을 확장할 떄에는 app.use() 메서드를 사용해서 확장함
+// express 앱에 기능을 확장할 때에는 app.use() 메서드를 사용해서 확장함
 
 // express.json() : 요청(Request)의 본문(body)에 담긴 내용(JSON 데이터)을 객체로 변환(파싱)하여 request.body에 저장
-//              프론트엔드에서 요청이 오는것도 string으로 옴. 그래서 객체로 변환해야되는데 그걸 express는 자동으로
-//              대분에 설피하면 매 번 써줄 필요 없이 해줌 => 경비원이 번역기를 갖고 있음
+//             프론트엔드에서 요청이 오는 것도 string으로 옴. 그래서 객체로 변환해야되는데 그걸 express는 자동으로
+//             대문에 설치하면 매 번 써줄 필요 없이 해줌 => 경비원이 번역기를 갖고 있음
 app.use(express.json());
 
 // express.urlencoded({ extended: true })
 // 요청(Request)의 본문(body)에 담긴 URL-encoded 데이터를 객체로 변환(파싱)하여 request.body에 저장
-// URL은 한들을 원래 포함할 수 없기 때문에 변환을 하게 되는데, 그것을 한글로 받아들일 수 있게 하는 기능
+// URL은 한글을 원래 포함할 수 없기 때문에 변환을 하게 되는데, 그것을 한글로 받아들일 수 있게 하는 기능
 app.use(express.urlencoded({ extended: true }));
 
 
-// 이 앱에 Request가 들어올 떄의 경로를 읽어서
-// 첫번쨰 매개변수의 값인 '/user'로 시작하면, 두번쨰 매개변수의 파일로 Routing시킴
-app.use("/user", userRouter)
+// 이 앱에 Request가 들어올 때의 경로를 읽어서
+// 첫번째 매개변수의 값인 '/user'로 시작하면, 두번째 매개변수의 파일로 Routing시킴
+app.use("/user", userRouter);
 
 
 
 
-// ------------------ Express 구동 부----------------
 
-
-
+// ----------------- Express 구동 부 --------------------
 
 // 환경 변수 중 key가 PORT인 값을 가져오되,
-// 프로그램을 실행한 입장에서 PORT는 있을 있을 수도 있고 없을 수도 있는 상황
-// PORT라는 한경변수는 프로그램에 포함된게 아니라 .env하는,
-// 자바스크립트 엔진이 관장하는 영역이 아니기 떄문
+// 프로그램을 실행한 입장에서 PORT는 있을 수도 있고 없을 수도 있는 상황
+// PORT라는 환경변수는 프로그램에 포함된게 아니라 .env라는,
+// 자바스크립트 엔진이 관장하는 영역이 아니기 때문
 const PORT = process.env.PORT;
 
 if (isNaN(Number(PORT))) {
-    console.log("PORT에 오류가 존재합니다.")
+    console.log("PORT에 오류가 존재합니다.");
     // 프로그램 종료 코드
     process.exit(1);
 }
 
-
-//실제 app을 구동
-// app.listen(여는포트번호, 서버가 실행되면서해야되는함수)
+// 실제 app을 구동
+// app.listen(여는포트번호, 서버가실행되면서해야되는함수)
 app.listen(PORT, () => {
     console.log(`서버 실행됨! http://localhost:${PORT}`);
 });
