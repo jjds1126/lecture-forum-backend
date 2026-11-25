@@ -1,5 +1,5 @@
-import {z} from "zod";
-import {GenderType} from "../../generated/prisma/enums.ts";
+import { z } from "zod";
+import { GenderType } from "../../generated/prisma/enums.ts";
 
 
 // zod 패키지를 통해 검증할 Input값에 대한 객체모양 생성
